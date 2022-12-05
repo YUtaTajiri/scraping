@@ -7,12 +7,14 @@ site_data = requests.get('https://www.walkerplus.com/event_list/today/ar1046/')
 soup = BeautifulSoup(site_data.content, 'html.parser')
 
 #エクセルファイルを開く
-wb = openpyxl.load_workbook('text.xlsx')
+from openpyxl import Workbook
+wb = Workbook()
 sheet = wb.active
 sheet.title='スクレイピング結果'
 cnt = 2
 sheet['A1'].value = 'webサイト1'
-
+sheet.column_dimensions['A'].width= 50
+sheet.column_dimensions['B'].width= 43
 # 特定のクラスだけ抜き出して表示
 links = soup.select('.m-mainlist-item')
 for link in links:
@@ -36,6 +38,8 @@ soup2 = BeautifulSoup(site_data2.content, 'html.parser')
 cnt_2 = 2
 sheet['D1'].value = 'webサイト2'
 links2 = soup2.select('.col-xs-6.col-sm-3')
+sheet.column_dimensions['D'].width= 80
+sheet.column_dimensions['E'].width= 40
 for link2 in links2:
     #rstrip()で空白を作ることができる
     data2 = link2.text.rstrip()
@@ -54,5 +58,5 @@ for link2 in links2:
     
 #エクセルファイルの保存
 wb.save('text.xlsx')
-wb.close()
+
 
