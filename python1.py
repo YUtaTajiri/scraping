@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import openpyxl
 
+#2022/12/08に更新
 # webページの情報を取得する
 site_data = requests.get('https://www.walkerplus.com/event_list/today/ar1046/')
 soup = BeautifulSoup(site_data.content, 'html.parser')
@@ -58,5 +59,6 @@ for link2 in links2:
     
 #エクセルファイルの保存
 wb.save('text.xlsx')
+
 
 
